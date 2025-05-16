@@ -21,8 +21,13 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
+      # First install with npm ci (fast, locked dependencies)
+      - name: Install dependencies (ci)
         run: npm ci
+
+      # Then optionally run npm install (if you need updates)
+      - name: Install dependencies (install)
+        run: npm install
 
       - name: Run Cypress tests
         run: npx cypress run
